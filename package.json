@@ -1,0 +1,26 @@
+{
+  "name": "coderlust",
+  "version": "1.0.0",
+  "description": "website with simple features in node js",
+  "main": "index.js",
+  "scripts": {
+    "test": "ping"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pprachit09/coderlust.git"
+  },
+  "keywords": [
+    "Coder"
+  ],
+  "author": "Kavita Kushare and Prachit Patil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pprachit09/coderlust/issues"
+  },
+  "homepage": "https://github.com/pprachit09/coderlust#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "jade": "^1.11.0"
+  }
+}
