@@ -4,7 +4,7 @@
   "description": "website with simple features in node js",
   "main": "index.js",
   "scripts": {
-    "test": "ping"
+    "test": "node --version"
   },
   "repository": {
     "type": "git",
