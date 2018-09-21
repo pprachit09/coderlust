@@ -7,6 +7,19 @@ var bodyParser = require('body-parser');
 //cipher variables
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+
+//multer object creation
+var multer  = require('multer')
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
@@ -74,11 +87,16 @@ app.post('/welcome', function(req, res){
 				console.log("Error in query");
 				console.log(error)
 			} else {
-				res.send("Welcome to coderlust "+username);
+				//res.send("Welcome to coderlust "+username);
+				res.render('upload');
 			}
 		});
 	  });
 	}
+});
+
+app.post('/upload', upload.single('imageupload'),function(req, res) {
+  res.send("Thanks for uploading.. We will notify you once the content gets approved!");
 });
 
 app.get('/testing', function(req, res){
