@@ -3,7 +3,23 @@ var mysql = require('mysql');
 var app = express();
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+//cipher variables
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+//multer object creation
+var multer  = require('multer')
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
@@ -48,9 +64,7 @@ app.post('/welcome', function(req, res){
     var mail = req.body.email;
     var pass = req.body.password;
     var sql = "insert into user (`username`, `mail`, `pass`) VALUES ?"
-    var values = [
-        [username, mail, pass]
-    ];
+
 	//check validity
 	req.check('username', 'Enter username').not().isEmpty();
 	req.assert('email', 'invalid email address').isEmail();
@@ -64,15 +78,25 @@ app.post('/welcome', function(req, res){
 	}
 	else {
 	  req.session.success = true;
-	  connection.query(sql, [values], function(error, rows, fields){
-        if(!!error){
-            console.log("Error in query");
-            console.log(error)
-        } else{
-            res.send("Welcome to coderlust "+username);
-        }
-    });
+	  bcrypt.hash(pass, saltRounds, function(err, hash){
+		var values = [
+          [username, mail, hash]
+        ];
+		  connection.query(sql, [values], function(error, rows, fields){
+			if(!!error){
+				console.log("Error in query");
+				console.log(error)
+			} else {
+				//res.send("Welcome to coderlust "+username);
+				res.render('upload');
+			}
+		});
+	  });
 	}
+});
+
+app.post('/upload', upload.single('imageupload'),function(req, res) {
+  res.send("Thanks for uploading.. We will notify you once the content gets approved!");
 });
 
 app.get('/testing', function(req, res){

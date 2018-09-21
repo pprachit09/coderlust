@@ -1,0 +1,13 @@
+doctype html
+html(lang='en')
+	head
+		block head
+		meta(charset='utf-8')
+		title uploads 
+	body
+		block content
+		h1= title
+		p Welcome to #{title}
+		form(action='/upload'  method='post', enctype='multipart/form-data')
+			input(type='file', name='imageupload')
+			input(type='submit', name='uploadimage', value='Upload Image')
