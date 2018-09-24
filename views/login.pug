@@ -1,12 +1,24 @@
-html
-    head
-        title= "Login"
-    body
-        form(action="/welcome", method="POST")
-            input(type="hidden", name ="_method", value="PUT")
-            p Name
-            input(type="text", name="name")
-            p Password
-            input(type="password", name="pass")
-            p 
-            input(type="submit", value="Log-In") 
+doctype html
+html(lang='en')
+	head
+		block head
+		meta(charset='utf-8')
+		title 
+		link(href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css', rel='stylesheet')
+	body
+		if(success)
+			h1 success
+		else
+			if(errors)
+				each error, i in errors
+					div.alert.alert-danger error #{i} : #{error.msg}
+			div.container
+				form(action='/welcome' method='post', class='form-vertical')
+					div.form-group
+						label Username
+						input.form-control(type='text' name='username' placeholder='Ex: Kavita')
+					div.form-group
+						label Password
+						input.form-control(type='password' name='password' placeholder='*******')
+					div.form-group
+						input.btn.btn-primary(type='submit' value='Log-in')

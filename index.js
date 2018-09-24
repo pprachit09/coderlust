@@ -35,12 +35,31 @@ app.get('/', function(req, res){
 });
 
 app.get('/login', function(req, res){
-    res.render('login');
+    res.render('login', {title: 'Log-in using coderlust account', success: req.session.success, errors: req.session.errors});
+    req.session.erros = null;
+});
+
+app.post('/', function(req, res){
+    req.check('username', 'Enter username').not().isEmpty();
+	req.check('password', 'invalid password').isLength({min: 4});
+	var errors = req.validationErrors();
+	if (errors) {
+	  console.log(errors);
+	  req.session.errors = errors;
+	  req.session.success = false;
+	  res.redirect(301, '/login');
+    }    
+    else {
+        req.session.success = true;
+        res.render("<h1>Done</h1>");
+    }
 });
 
 app.get('/signup', function(req, res){
-    res.render('signup', {title: 'form validation', success: req.session.success, errors: req.session.errors});
-	req.session.erros = null;
+    res.render('signup', {title: 'Sign up for coderlust', success: req.session.success, errors: req.session.errors});
+    req.session.erros = null;
+    //check validity
+	
 });
 
 app.post('/welcome', function(req, res){
@@ -51,8 +70,7 @@ app.post('/welcome', function(req, res){
     var values = [
         [username, mail, pass]
     ];
-	//check validity
-	req.check('username', 'Enter username').not().isEmpty();
+    req.check('username', 'Enter username').not().isEmpty();
 	req.assert('email', 'invalid email address').isEmail();
 	req.check('password', 'invalid password').isLength({min: 4}).equals(req.body.confirmpassword);
 	var errors = req.validationErrors();
@@ -60,19 +78,15 @@ app.post('/welcome', function(req, res){
 	  console.log(errors);
 	  req.session.errors = errors;
 	  req.session.success = false;
-	  res.redirect('/signup');
+	  res.redirect(301, '/signup');
 	}
 	else {
-	  req.session.success = true;
-	  connection.query(sql, [values], function(error, rows, fields){
-        if(!!error){
-            console.log("Error in query");
-            console.log(error)
-        } else{
-            res.send("Welcome to coderlust "+username);
-        }
-    });
-	}
+        req.session.success = true;
+        connection.query(sql, [values], function(error, rows){
+            if(error) throw error;
+            res.send("<h1>Welcome to coderlust</h1><br><br><b>To continue, Please go back to <a href='http://localhost:9000/'>Home</a> page and log-in</b>"); 
+        });
+    }
 });
 
 app.get('/testing', function(req, res){
@@ -81,13 +95,10 @@ app.get('/testing', function(req, res){
             console.log("Error in query");
         } else{
             console.log(rows[0].ID);
-        }
+        }   
     });
 });
 
-app.get('/quit', function(req, res){
-    res.send('Bye Express');
-});
 
 var server = app.listen(9000, function(){
     var host = server.address().address;

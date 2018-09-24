@@ -25,6 +25,8 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.3.0",
     "mysql": "^2.10.2",
-    "pug": "^2.0.3"
+    "nodemon": "^1.18.4",
+    "pug": "^2.0.3",
+    "save": "^2.3.2"
   }
 }
