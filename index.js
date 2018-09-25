@@ -7,7 +7,17 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
-
+//multer object creation
+var multer  = require('multer')
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
 var connection = mysql.createConnection({
     //properties
     host : 'localhost',
@@ -33,6 +43,9 @@ app.set('view engine', 'pug');
 
 app.get('/', function(req, res){
     res.render('home');
+});
+app.get('/upload', function(req, res){
+    res.render('upload');
 });
 
 app.get('/login', function(req, res){
@@ -88,6 +101,9 @@ app.post('/welcome', function(req, res){
             res.send("<h1>Welcome to coderlust</h1><br><br><b>To continue, Please go back to <a href='http://localhost:9000/'>Home</a> page and log-in</b>"); 
         });
     }
+});
+app.post('/upload', upload.single('imageupload'),function(req, res) {
+  res.send("Thanks for uploading.. We will notify you once the content gets approved!");
 });
 
 app.get('/testing', function(req, res){
