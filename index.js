@@ -16,7 +16,8 @@ var connection = mysql.createConnection({
     database : 'codelerlust',
     port : '3306'
 });
-
+var path = require('path');
+app.use("/public", express.static(path.join(__dirname, 'public')));
 connection.connect(function(error) {
     //callback
     if (!!error){
@@ -31,7 +32,7 @@ app.use(express.static('public'));
 app.set('view engine', 'pug');
 
 app.get('/', function(req, res){
-    res.render('index');
+    res.render('home');
 });
 
 app.get('/login', function(req, res){

@@ -1,0 +1,99 @@
+doctype html
+html(lang='en')
+	head
+		block head
+		meta(charset='utf-8')
+		title 
+		link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+		link(href='/public/css/style.css', rel='stylesheet')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+	body
+		nav.navbar.navbar-default.navbar-fixed-top
+			div.container-fluid
+				div.navbar-header
+					h1 CoderLust-Logo
+				ul.nav.navbar-nav
+					li
+						a(href="/home") Home
+					li
+						a(href="/about") About Us
+					li
+						a(href="/login") Sign In
+					li
+						a(href="/signup") Sign Up
+		div(id="myCarousel" class="carousel slide" data-ride="carousel")
+			ol.carousel-indicators
+				li(data-target = "myCarousel" data-slide-to = "0" class="active")
+				li(data-target = "myCarousel" data-slide-to = "1")
+			div.carousel-inner
+				div.item.active
+					a(href="/domestic")
+						img(src="/public/images/domestic/domestic.png" class="img-responsive")
+						div.carousel-caption
+							h1 Domestic
+				div.item
+					a(href="/international")
+						img(src="/public/images/international/international.png" class="img-responsive")
+						div.carousel-caption
+							h1 International
+			a(href="#myCarousel" class="carousel-control left" data-slide="prev")
+				span.icon-prev
+			a(href="#myCarousel" class="carousel-control right" data-slide="next")
+				span.icon-next
+				
+				
+	div.content
+		div.form-group.search-box
+			input(type="text" class="form-control")
+			span.glyphicon.glyphicon-search.form-control-feedback
+	footer.section.footer-classic.context-dark.bg-image
+		div.container
+			div.row.row-30
+				div.col-md-4.col-xl-5
+					div.pr-xl-4
+						a(href="/home")
+							img(src="")
+						p We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.
+				div.col-md-4
+					h5 Contacts
+					dl.contact-list
+						dt Address:
+						dd 707-708 Mahavir Trinkets, Kajurmarg, Mumbai
+					dl.contact-list
+						dt Email:
+						dd 
+							a(href="mailto:#") pk.coderlust@gmail.com
+					dl.contact-list
+						dt Phones:
+						dd 
+							a(href="tel:#") +91 9921347878 or 
+							a(href="tel:#") +91 8698219323
+				div.col-md-4.col-xl-3
+					h5 Links
+						ul.nav-list
+							li
+								a(href="#") About
+							li
+								a(href="#") Projects
+							li
+								a(href="#") Blogs
+							li
+								a(href="#") Pricing
+		div.row.no-gutters.social-container
+			div.col
+				a(class="social-inner" href="#")
+					span.icon.mdi.mdi-facebook
+					span Facebook
+			div.col
+				a(class="social-inner" href="#")
+					span.icon.mdi.mdi-facebook
+					span Instagram
+			div.col
+				a(class="social-inner" href="#")
+					span.icon.mdi.mdi-facebook
+					span Twitter
+			div.col
+				a(class="social-inner" href="#")
+					span.icon.mdi.mdi-facebook
+					span Google
