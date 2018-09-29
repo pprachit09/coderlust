@@ -42,7 +42,7 @@ app.use(express.static('public'));
 app.set('view engine', 'pug');
 
 app.get('/', function(req, res){
-    res.render('home');
+    res.render('home', {success: req.session.success});
 });
 app.get('/upload', function(req, res){
     res.render('upload');
@@ -58,14 +58,13 @@ app.post('/', function(req, res){
 	req.check('password', 'invalid password').isLength({min: 4});
 	var errors = req.validationErrors();
 	if (errors) {
-	  console.log(errors);
 	  req.session.errors = errors;
 	  req.session.success = false;
 	  res.redirect(301, '/login');
     }    
     else {
         req.session.success = true;
-        res.render("<h1>Done</h1>");
+        res.render('home', {success: req.session.success});
     }
 });
 
@@ -118,8 +117,7 @@ app.get('/testing', function(req, res){
 
 
 var server = app.listen(9000, function(){
-    var host = server.address().address;
     var port = server.address().port;
 
-    console.log("Your app is running at http://%s:%s", host, port);
+    console.log("Your app is running at http://localhost:%s", port);
 });

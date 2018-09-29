@@ -9,19 +9,32 @@ html(lang='en')
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
 		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
 	body
-		nav.navbar.navbar-default.navbar-fixed-top
-			div.container-fluid
-				div.navbar-header
-					h1 CoderLust-Logo
-				ul.nav.navbar-nav
-					li
-						a(href="/home") Home
-					li
-						a(href="/about") About Us
-					li
-						a(href="/login") Sign In
-					li
-						a(href="/signup") Sign Up
+		if(success)
+			nav.navbar.navbar-default.navbar-fixed-top
+				div.container-fluid
+					div.navbar-header
+						h1 CoderLust-Logo
+					ul.nav.navbar-nav
+						li
+							a(href="/home") Home
+						li
+							a(href="/about") About Us
+						li
+							a(href="/login") Upload a Photo
+		else
+			nav.navbar.navbar-default.navbar-fixed-top
+				div.container-fluid
+					div.navbar-header
+						h1 CoderLust-Logo
+					ul.nav.navbar-nav
+						li
+							a(href="/home") Home
+						li
+							a(href="/about") About Us
+						li
+							a(href="/login") Sign In
+						li
+							a(href="/signup") Sign Up
 		div(id="myCarousel" class="carousel slide" data-ride="carousel")
 			ol.carousel-indicators
 				li(data-target = "myCarousel" data-slide-to = "0" class="active")
@@ -29,12 +42,12 @@ html(lang='en')
 			div.carousel-inner
 				div.item.active
 					a(href="/domestic")
-						img(src="/public/images/domestic/domestic.png" class="img-responsive")
+						img(src="/public/images/domestic/real.jpg" class="img-responsive")
 						div.carousel-caption
 							h1 Domestic
 				div.item
 					a(href="/international")
-						img(src="/public/images/international/international.png" class="img-responsive")
+						img(src="/public/images/international/pogba.jpeg" class="img-responsive")
 						div.carousel-caption
 							h1 International
 			a(href="#myCarousel" class="carousel-control left" data-slide="prev")

@@ -7,13 +7,13 @@ html(lang='en')
 		link(href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css', rel='stylesheet')
 	body
 		if(success)
-			h1 success
+			include home
 		else
 			if(errors)
 				each error, i in errors
 					div.alert.alert-danger error #{i} : #{error.msg}
 			div.container
-				form(action='/welcome' method='post', class='form-vertical')
+				form(action='/' method='post', class='form-vertical')
 					div.form-group
 						label Username
 						input.form-control(type='text' name='username' placeholder='Ex: Kavita')
