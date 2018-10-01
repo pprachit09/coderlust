@@ -5,6 +5,7 @@ html(lang='en')
 		meta(charset='utf-8')
 		title 
 		link(href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css', rel='stylesheet')
+		link(href='/public/css/style.css', rel='stylesheet')
 	body
 		if(success)
 			include home
@@ -12,13 +13,19 @@ html(lang='en')
 			if(errors)
 				each error, i in errors
 					div.alert.alert-danger error #{i} : #{error.msg}
-			div.container
-				form(action='/' method='post', class='form-vertical')
-					div.form-group
-						label Username
-						input.form-control(type='text' name='username' placeholder='Ex: Kavita')
-					div.form-group
-						label Password
-						input.form-control(type='password' name='password' placeholder='*******')
-					div.form-group
-						input.btn.btn-primary(type='submit' value='Log-in')
+			div
+				div.container
+					form(action='/' method='post', class='form-vertical')
+						div.form-group
+							label Username
+							input.form-control(type='text' name='username' placeholder='Ex: Kavita')
+						div.form-group
+							label Password
+							input.form-control(type='password' name='password' placeholder='*******')
+						div.form-group
+							input.btn.btn-primary(type='submit' value='Log-in')
+						div(class="btn")
+							a(href="/auth/google")
+								div
+									img(width="20px", alt="Google &quot;G&quot; Logo", src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png")
+									label Login with Google
