@@ -117,6 +117,12 @@ app.get('/testing', function(req, res){
     });
 });
 
+//Logout from the session
+app.get('/logout', function(req, res){
+  req.logout();
+  req.session.success = false;
+  res.redirect('/');  
+});
 //Listen on 9000 port
 var server = app.listen(9000, function(){
     var port = server.address().port;
