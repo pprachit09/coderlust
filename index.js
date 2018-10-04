@@ -58,7 +58,7 @@ app.post('/', function(req, res){
     }    
     else {
         req.session.success = true;
-        res.render('home', {success: req.session.success});
+        res.render('home', {success: req.session.success, hours:(new Date()).getHours(), user: req.body.username});
     }
 });
 

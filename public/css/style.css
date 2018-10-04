@@ -78,3 +78,8 @@ ul, ol {
     position: relative;
     display: block;
 }
+/* User Greetings */
+.nav > li.user-greeting a {
+	color: #FA8072;
+	font-weight: bold;
+}
