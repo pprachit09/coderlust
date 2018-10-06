@@ -21,6 +21,15 @@ html(lang='en')
 							a(href="/about") About Us
 						li
 							a(href="/upload") Upload a Photo
+						li.user-greeting
+							if(hours < 12)
+								a Good Morning #{user}!
+							if(hours > 17)
+								a Good Evening #{user}!
+							if(hours > 12)
+								a Good Afternoon #{user}!
+						li
+							a(href="/logout") Logout
 		else
 			nav.navbar.navbar-default.navbar-fixed-top
 				div.container-fluid
